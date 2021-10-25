@@ -9,15 +9,17 @@
  */
 
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import Button from './components/Button/Button';
 
 const App = () => {
   return (
     <SafeAreaView>
-      <StatusBar />
+      {/* <StatusBar /> */}
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
           <Text>Hello world</Text>
+          <Button text="Benjamin" />
         </View>
       </ScrollView>
     </SafeAreaView>
