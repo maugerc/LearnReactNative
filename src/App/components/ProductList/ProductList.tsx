@@ -1,21 +1,23 @@
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Product from '../Product/Product';
 import {Props} from './ProductList.props';
 
 const ProductList: React.FC<Props> = (props: Props) => {
   return (
-    <View>
+    <View style={style.listContainer}>
       {props.products.map((e, i) => (
-        <Product
-          imgSrc={e.imgSrc}
-          name={e.name}
-          price={e.price}
-          key={'prod-' + e.id}
-        />
+        <Product product={e} key={'prod-' + e.id} />
       ))}
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  listContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+});
 
 export default ProductList;

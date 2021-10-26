@@ -1,5 +1,5 @@
-import {ProductProps} from '../Product/ProductProds';
+import {IProduct} from '../../../interfaces/ProductProds';
 
 export interface Props {
-  products: ProductProps[];
+  products: IProduct[];
 }

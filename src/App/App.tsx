@@ -8,41 +8,30 @@
  * @format
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {ProductProps} from './components/Product/ProductProds';
+import {IProduct} from '../interfaces/ProductProds';
 import ProductList from './components/ProductList/ProductList';
 import ProductSearch from './components/ProductSearch/ProductSearch';
 
-const initialState: ProductProps[] = [
-  {
-    id: 1,
-    name: 'Pass saison Grand massif',
-    price: 300,
-    imgSrc: 'https://picsum.photos/id/684/600/400',
-  },
-  {
-    id: 2,
-    name: 'Pass saison Les Gets',
-    price: 500,
-    imgSrc: 'https://picsum.photos/id/685/600/400',
-  },
-  {
-    id: 3,
-    name: 'Pass saison Sommand',
-    price: 200,
-    imgSrc: 'https://picsum.photos/id/682/600/400',
-  },
-];
+const initialState: IProduct[] = new Array<IProduct>();
 
 const App = () => {
   const [products, setProducts] = useState(initialState);
+  const [searchText, setSearchText] = useState('');
+  useEffect(() => {
+    setProducts(
+      initialState.filter(p =>
+        p.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+      ),
+    );
+  }, [searchText]);
   return (
     <SafeAreaView>
       {/* <StatusBar /> */}
       <ProductSearch
         onChangeText={(value: string) => {
-          setProducts(initialState.filter(p => p.name.includes(value)));
+          setSearchText(value);
         }}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">

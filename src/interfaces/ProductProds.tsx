@@ -1,4 +1,4 @@
-export interface ProductProps {
+export interface IProduct {
   id?: number;
   name: string;
   imgSrc: string;

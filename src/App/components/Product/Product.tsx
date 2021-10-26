@@ -1,14 +1,18 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import {ProductProps} from './ProductProds';
+import {IProduct} from '../../../interfaces/ProductProds';
 
-const Product: React.FC<ProductProps> = props => {
+interface Props {
+  product: IProduct;
+}
+
+const Product: React.FC<Props> = props => {
   return (
     <TouchableHighlight>
       <View style={styles.container}>
-        <Image source={{uri: props.imgSrc}} style={styles.imgSize} />
-        <Text>{props.name}</Text>
-        <Text style={styles.price}>{props.price}$</Text>
+        <Image source={{uri: props.product.imgSrc}} style={styles.imgSize} />
+        <Text>{props.product.name}</Text>
+        <Text style={styles.price}>{props.product.price}$</Text>
       </View>
     </TouchableHighlight>
   );
@@ -26,8 +30,8 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   imgSize: {
-    width: 300,
-    height: 200,
+    width: 150,
+    height: 100,
   },
   price: {
     fontSize: 16,

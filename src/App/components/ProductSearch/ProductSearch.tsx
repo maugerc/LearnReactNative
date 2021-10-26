@@ -35,11 +35,8 @@ const style = StyleSheet.create({
   },
   text: {
     width: '80%',
-    borderWidth: 1,
   },
-  button: {
-    borderWidth: 1,
-  },
+  button: {},
 });
 
 export default ProductSearch;

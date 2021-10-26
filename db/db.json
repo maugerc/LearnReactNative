@@ -1,0 +1,28 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Pass saison Grand massif",
+      "price": 300,
+      "imgSrc": "https://picsum.photos/id/684/600/400"
+    },
+    {
+      "id": 2,
+      "name": "Pass saison Les Gets",
+      "price": 500,
+      "imgSrc": "https://picsum.photos/id/685/600/400"
+    },
+    {
+      "id": 3,
+      "name": "Pass saison Sommand",
+      "price": 200,
+      "imgSrc": "https://picsum.photos/id/682/600/400"
+    },
+    {
+      "name": "Pass saison PassPorte",
+      "price": 300,
+      "imgSrc": "https://picsum.photos/id/690/600/400",
+      "id": 5
+    }
+  ]
+}
