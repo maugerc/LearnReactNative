@@ -12,6 +12,7 @@ import React, {useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
 import {ProductProps} from './components/Product/ProductProds';
 import ProductList from './components/ProductList/ProductList';
+import ProductSearch from './components/ProductSearch/ProductSearch';
 
 const initialState: ProductProps[] = [
   {
@@ -39,6 +40,11 @@ const App = () => {
   return (
     <SafeAreaView>
       {/* <StatusBar /> */}
+      <ProductSearch
+        onChangeText={(value: string) => {
+          setProducts(initialState.filter(p => p.name.includes(value)));
+        }}
+      />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <ProductList products={products} />
       </ScrollView>
