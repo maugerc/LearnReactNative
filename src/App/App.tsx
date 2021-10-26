@@ -9,40 +9,38 @@
  */
 
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
-import Button from './components/Button/Button';
+import {SafeAreaView, ScrollView} from 'react-native';
+import {ProductProps} from './components/Product/ProductProds';
+import ProductList from './components/ProductList/ProductList';
+
+const initialState: ProductProps[] = [
+  {
+    id: 1,
+    name: 'Pass saison Grand massif',
+    price: 300,
+    imgSrc: 'https://picsum.photos/id/684/600/400',
+  },
+  {
+    id: 2,
+    name: 'Pass saison Les Gets',
+    price: 500,
+    imgSrc: 'https://picsum.photos/id/685/600/400',
+  },
+  {
+    id: 3,
+    name: 'Pass saison Sommand',
+    price: 200,
+    imgSrc: 'https://picsum.photos/id/682/600/400',
+  },
+];
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
+  const [products, setProducts] = useState(initialState);
   return (
     <SafeAreaView>
       {/* <StatusBar /> */}
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View>
-          <Text>Valeur du compteur : {counter}</Text>
-        </View>
-        <View>
-          <Text>Hello world</Text>
-          <Button
-            bgColor="orange"
-            onMyButtonPressedAction={() => {
-              setCounter(counter + 1);
-              console.log(counter);
-            }}>
-            <View>
-              <Text>Ajouter 1</Text>
-            </View>
-          </Button>
-          <Button
-            onMyButtonPressedAction={() => {
-              setCounter(counter - 1);
-              console.log(counter);
-            }}>
-            <View>
-              <Text>Soustraire 1</Text>
-            </View>
-          </Button>
-        </View>
+        <ProductList products={products} />
       </ScrollView>
     </SafeAreaView>
   );
