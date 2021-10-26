@@ -16,11 +16,10 @@
       "withStyle": true,
       "withTest": false,
       "withStory": false,
-      "withLazy": true,
+      "withLazy": false,
       "customTemplates":{
         "component":"grc_templates/function/TemplateName.tsx",
-        "style":"grc_templates/function/TemplateName.style.tsx",
-        "lazy":"grc_templates/function/TemplateName.props.tsx"
+        "style":"grc_templates/function/TemplateName.style.tsx"
       }
     }
   }

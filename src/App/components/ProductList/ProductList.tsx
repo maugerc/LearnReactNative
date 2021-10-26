@@ -1,7 +1,11 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {IProduct} from '../../../interfaces/ProductProds';
 import Product from '../Product/Product';
-import {Props} from './ProductList.props';
+
+interface Props {
+  products: IProduct[];
+}
 
 const ProductList: React.FC<Props> = (props: Props) => {
   return (

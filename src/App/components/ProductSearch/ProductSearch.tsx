@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, TextInput, View} from 'react-native';
-import {Props} from './ProductSearch.props';
+
+interface Props {
+  search?: string;
+  onChangeText: Function;
+}
 
 const ProductSearch: React.FC<Props> = (props: Props) => {
   const [state, setState] = useState('');
