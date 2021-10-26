@@ -1,14 +1,19 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableHighlight, View} from 'react-native';
 import {Props} from './Props';
 import PropTypes from 'prop-types';
 
 const Button: React.FC<Props> = props => {
   console.log(props);
   return (
-    <View style={{...styles.container, backgroundColor: props.bgColor}}>
-      {props.children}
-    </View>
+    <TouchableHighlight
+      onPress={() => {
+        props.onMyButtonPressedAction('test');
+      }}>
+      <View style={{...styles.container, backgroundColor: props.bgColor}}>
+        {props.children}
+      </View>
+    </TouchableHighlight>
   );
 };
 

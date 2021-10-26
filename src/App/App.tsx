@@ -8,25 +8,38 @@
  * @format
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import Button from './components/Button/Button';
 
 const App = () => {
+  const [counter, setCounter] = useState(0);
   return (
     <SafeAreaView>
       {/* <StatusBar /> */}
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View>
+          <Text>Valeur du compteur : {counter}</Text>
+        </View>
+        <View>
           <Text>Hello world</Text>
-          <Button bgColor="orange">
+          <Button
+            bgColor="orange"
+            onMyButtonPressedAction={() => {
+              setCounter(counter + 1);
+              console.log(counter);
+            }}>
             <View>
-              <Text>Benjamin le button</Text>
+              <Text>Ajouter 1</Text>
             </View>
           </Button>
-          <Button>
+          <Button
+            onMyButtonPressedAction={() => {
+              setCounter(counter - 1);
+              console.log(counter);
+            }}>
             <View>
-              <Text>Benjamin le button</Text>
+              <Text>Soustraire 1</Text>
             </View>
           </Button>
         </View>
