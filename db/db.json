@@ -16,13 +16,19 @@
       "id": 3,
       "name": "Pass saison Sommand",
       "price": 200,
-      "imgSrc": "https://picsum.photos/id/682/600/400"
+      "imgSrc": "https://picsum.photos/id/702/600/400"
     },
     {
       "name": "Pass saison PassPorte",
       "price": 1000,
-      "imgSrc": "https://picsum.photos/id/690/600/400",
+      "imgSrc": "https://picsum.photos/id/678/600/400",
       "id": 5
+    },
+    {
+      "name": "Pass saison Hte Savoie",
+      "price": 2000,
+      "imgSrc": "https://picsum.photos/id/676/600/400",
+      "id": 6
     }
   ]
 }

@@ -10,22 +10,32 @@
 
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {IProduct} from '../interfaces/ProductProds';
+import {IProduct} from '../Interfaces/ProductProds';
 import ProductList from './components/ProductList/ProductList';
 import ProductSearch from './components/ProductSearch/ProductSearch';
+import {ADR_REST, RESOURCES_NAME} from './config/config';
 
 const initialState: IProduct[] = new Array<IProduct>();
 
 const App = () => {
   const [products, setProducts] = useState(initialState);
+  const [filteredProducts, setFilteredProducts] = useState(initialState);
   const [searchText, setSearchText] = useState('');
+
   useEffect(() => {
-    setProducts(
-      initialState.filter(p =>
+    setFilteredProducts(
+      products.filter(p =>
         p.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
       ),
     );
-  }, [searchText]);
+  }, [products, searchText]);
+
+  useEffect(() => {
+    fetch(`${ADR_REST}${RESOURCES_NAME.products}`)
+      .then(f => f.json())
+      .then(a => setProducts(a));
+  }, []);
+
   return (
     <SafeAreaView>
       {/* <StatusBar /> */}
@@ -35,7 +45,7 @@ const App = () => {
         }}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <ProductList products={products} />
+        <ProductList products={filteredProducts} />
       </ScrollView>
     </SafeAreaView>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {IProduct} from '../../../interfaces/ProductProds';
+import {IProduct} from '../../../Interfaces/ProductProds';
 import Product from '../Product/Product';
 
 interface Props {
@@ -21,6 +21,7 @@ const style = StyleSheet.create({
   listContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'space-evenly',
   },
 });
 

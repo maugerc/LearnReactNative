@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
-import {IProduct} from '../../../interfaces/ProductProds';
+import {IProduct} from '../../../Interfaces/ProductProds';
 
 interface Props {
   product: IProduct;
@@ -12,7 +12,7 @@ const Product: React.FC<Props> = props => {
       <View style={styles.container}>
         <Image source={{uri: props.product.imgSrc}} style={styles.imgSize} />
         <Text>{props.product.name}</Text>
-        <Text style={styles.price}>{props.product.price}$</Text>
+        <Text style={styles.price}>{props.product.price} CHF</Text>
       </View>
     </TouchableHighlight>
   );
@@ -30,8 +30,9 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   imgSize: {
-    width: 150,
+    width: 160,
     height: 100,
+    resizeMode: 'stretch',
   },
   price: {
     fontSize: 16,
