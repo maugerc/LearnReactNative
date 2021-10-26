@@ -1,3 +1,6 @@
+import {ReactElement, ReactNode} from 'react';
+
 export interface Props {
-  text: string;
+  children: ReactElement | Array<ReactElement | ReactNode> | String;
+  bgColor?: string;
 }
