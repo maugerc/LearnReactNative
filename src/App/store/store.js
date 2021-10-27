@@ -13,8 +13,12 @@ const initialState = {
   searchText: '',
 };
 
+let interv = undefined;
 const reducerProduct = (state = initialState, action) => {
-  switch (action.type) {
+  const type = action.type.includes('@@redux/INIT')
+    ? 'START_PULLING'
+    : action.type;
+  switch (type) {
     case PRODUCTS_ACTIONS.ADD_PRODUCTS:
       return {
         ...state,
@@ -27,6 +31,16 @@ const reducerProduct = (state = initialState, action) => {
         .then(a =>
           store.dispatch({type: PRODUCTS_ACTIONS.ADD_PRODUCTS, values: a}),
         );
+      return state;
+    case 'START_PULLING':
+      interv = interv
+        ? interv
+        : setInterval(() => {
+            store.dispatch({type: PRODUCTS_ACTIONS.INIT});
+          }, 1000);
+      return state;
+    case 'STOP_PULLING':
+      interv = interv ? clearInterval(interv) : null;
       return state;
     case PRODUCTS_ACTIONS.SET_SEARCH:
       return {
