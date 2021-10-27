@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 import {IProduct} from '../../../Interfaces/ProductProds';
 import Product from '../Product/Product';
@@ -12,9 +12,11 @@ type Props = StateProps & DispatchProps & IProps;
 const ProductList: React.FC<Props> = (props: Props) => {
   return (
     <View style={style.listContainer}>
-      {props.products.map((e: IProduct) => (
-        <Product product={e} key={'prod-' + e.id} />
-      ))}
+      <ScrollView>
+        {props.products.map((e: IProduct) => (
+          <Product product={e} key={'prod-' + e.id} />
+        ))}
+      </ScrollView>
     </View>
   );
 };
