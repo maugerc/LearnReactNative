@@ -1,16 +1,18 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {connect} from 'react-redux';
 import {IProduct} from '../../../Interfaces/ProductProds';
 import Product from '../Product/Product';
 
-interface Props {
-  products: IProduct[];
-}
+interface IProps {}
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = typeof mapDispatchToProps;
+type Props = StateProps & DispatchProps & IProps;
 
 const ProductList: React.FC<Props> = (props: Props) => {
   return (
     <View style={style.listContainer}>
-      {props.products.map((e, i) => (
+      {props.products.map((e: IProduct) => (
         <Product product={e} key={'prod-' + e.id} />
       ))}
     </View>
@@ -25,4 +27,12 @@ const style = StyleSheet.create({
   },
 });
 
-export default ProductList;
+function mapStateToProps(state: any, own: any) {
+  return {products: state.datas.filteredProducts, ...own};
+}
+
+function mapDispatchToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

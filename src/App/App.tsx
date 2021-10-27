@@ -8,46 +8,43 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {SafeAreaView, ScrollView} from 'react-native';
-import {IProduct} from '../Interfaces/ProductProds';
+import {Provider} from 'react-redux';
 import ProductList from './components/ProductList/ProductList';
 import ProductSearch from './components/ProductSearch/ProductSearch';
-import {ADR_REST, RESOURCES_NAME} from './config/config';
-
-const initialState: IProduct[] = new Array<IProduct>();
+import {store} from './store/store';
 
 const App = () => {
-  const [products, setProducts] = useState(initialState);
-  const [filteredProducts, setFilteredProducts] = useState(initialState);
-  const [searchText, setSearchText] = useState('');
+  // console.log(store);
+  // const [products, setProducts] = useState(initialState);
+  // const [filteredProducts, setFilteredProducts] = useState(initialState);
+  // const [searchText, setSearchText] = useState('');
 
-  useEffect(() => {
-    setFilteredProducts(
-      products.filter(p =>
-        p.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
-      ),
-    );
-  }, [products, searchText]);
+  // useEffect(() => {
+  //   setFilteredProducts(
+  //     products.filter(p =>
+  //       p.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()),
+  //     ),
+  //   );
+  // }, [products, searchText]);
 
-  useEffect(() => {
-    fetch(`${ADR_REST}${RESOURCES_NAME.products}`)
-      .then(f => f.json())
-      .then(a => setProducts(a));
-  }, []);
+  // useEffect(() => {
+  //   fetch(`${ADR_REST}${RESOURCES_NAME.products}`)
+  //     .then(f => f.json())
+  //     .then(a => setProducts(a));
+  // }, []);
 
   return (
-    <SafeAreaView>
-      {/* <StatusBar /> */}
-      <ProductSearch
-        onChangeText={(value: string) => {
-          setSearchText(value);
-        }}
-      />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <ProductList products={filteredProducts} />
-      </ScrollView>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView>
+        {/* <StatusBar /> */}
+        <ProductSearch />
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <ProductList />
+        </ScrollView>
+      </SafeAreaView>
+    </Provider>
   );
 };
 

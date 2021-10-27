@@ -1,14 +1,17 @@
+import {combineReducers, createStore} from 'redux';
+import {ADR_REST, RESOURCES_NAME} from '../config/config';
+
+export const PRODUCTS_ACTIONS = Object.freeze({
+  ADD_PRODUCTS: 'ADD_PRODUCTS',
+  INIT: 'INIT',
+  SET_SEARCH: 'SET_SEARCH',
+});
+
 const initialState = {
   products: [],
   filteredProducts: [],
   searchText: '',
 };
-
-const PRODUCTS_ACTIONS = Object.freeze({
-  ADD_PRODUCTS: 'ADD_PRODUCTS',
-  INIT: 'INIT',
-  SET_SEARCH: 'SET_SEARCH',
-});
 
 const reducerProduct = (state = initialState, action) => {
   switch (action.type) {
@@ -18,6 +21,13 @@ const reducerProduct = (state = initialState, action) => {
         products: action.values,
         filteredProducts: action.values,
       };
+    case PRODUCTS_ACTIONS.INIT:
+      fetch(`${ADR_REST}${RESOURCES_NAME.products}`)
+        .then(f => f.json())
+        .then(a =>
+          store.dispatch({type: PRODUCTS_ACTIONS.ADD_PRODUCTS, values: a}),
+        );
+      return state;
     case PRODUCTS_ACTIONS.SET_SEARCH:
       return {
         ...state,
@@ -31,21 +41,21 @@ const reducerProduct = (state = initialState, action) => {
   }
 };
 
-let state = reducerProduct(undefined, {
-  type: PRODUCTS_ACTIONS.ADD_PRODUCTS,
+const initialStateNav = {
+  window: null,
+};
 
-  values: [
-    {id: 0, name: 'au', prix: '', img: ''},
-    {id: 2, name: 'ox', prix: '', img: ''},
-    {id: 1, name: 'ua', prix: '', img: ''},
-  ],
-});
+const reducerNav = (state = initialStateNav, action) => {
+  switch (action.type) {
+    case 'SET_WINDOW':
+      return {window: action.value};
+    default:
+      return state;
+  }
+};
 
-console.log(state);
+export const store = createStore(
+  combineReducers({datas: reducerProduct, nav: reducerNav}),
+);
 
-state = reducerProduct(state, {
-  type: PRODUCTS_ACTIONS.SET_SEARCH,
-  value: 'u',
-});
-
-console.log(state);
+store.dispatch({type: PRODUCTS_ACTIONS.INIT});
