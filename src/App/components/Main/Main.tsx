@@ -1,20 +1,34 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {connect} from 'react-redux';
+import ProductEditor from '../ProductEditor/ProductEditor';
+import ProductListWithSearch from '../ProductListWithSearch/ProductListWithSearch';
 
-interface Props {}
+interface IProps {}
+interface DispatchProps {
+  gotoList: Function;
+  gotoEditor: Function;
+}
+type Props = DispatchProps & IProps;
 
-const Main: React.FC<Props> = () => {
+const Main: React.FC<Props> = (props: Props) => {
   return (
     <View style={style.container}>
       <Text style={style.title}>Lear React Native App</Text>
       <View style={style.buttons}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.gotoList();
+          }}>
           <View style={style.button}>
             <Image source={require('../../img/menu.png')} style={style.image} />
             <Text>List produits</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            props.gotoEditor();
+          }}>
           <View style={style.button}>
             <Image source={require('../../img/pen.png')} style={style.image} />
             <Text>Editer</Text>
@@ -27,7 +41,6 @@ const Main: React.FC<Props> = () => {
 
 const style = StyleSheet.create({
   container: {
-    paddingTop: 50,
     backgroundColor: 'dodgerblue',
     alignItems: 'center',
     height: '100%',
@@ -62,4 +75,28 @@ const style = StyleSheet.create({
   },
 });
 
-export default Main;
+const mapStateToProps = (state: any, own: any) => {
+  return own;
+};
+
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    gotoList: () =>
+      dispatch({type: 'SET_WINDOW', value: <ProductListWithSearch />}),
+    gotoEditor: () =>
+      dispatch({
+        type: 'SET_WINDOW',
+        value: (
+          <ProductEditor
+            product={{
+              name: '',
+              price: 0,
+              imgSrc: '',
+            }}
+          />
+        ),
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

@@ -1,7 +1,8 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {Props} from './TemplateName.props';
 import style from './TemplateName.style';
+
+interface Props {}
 
 const TemplateName: React.FC<Props> = (props: Props) => {
   return (

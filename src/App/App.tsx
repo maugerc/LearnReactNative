@@ -8,17 +8,20 @@
  * @format
  */
 
-import React from 'react';
-import {Provider} from 'react-redux';
-import Main from './components/Main/Main';
-import {store} from './store/store';
+import {connect} from 'react-redux';
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Main />
-    </Provider>
-  );
+type StateProps = ReturnType<typeof mapStateToProps>;
+type Props = StateProps;
+
+const App = (props: Props) => {
+  return props.window;
 };
 
-export default App;
+const mapStateToProps = (state: any, own: any) => {
+  return {window: state.nav.window, ...own};
+};
+const mapDispatchToProps = () => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

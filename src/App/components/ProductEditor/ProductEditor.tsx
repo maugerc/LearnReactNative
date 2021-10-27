@@ -1,18 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, TextInput, ScrollView} from 'react-native';
+import {connect} from 'react-redux';
 import {IProduct} from '../../../Interfaces/ProductProds';
+import {PRODUCTS_ACTIONS} from '../../store/store';
 import MyButton from '../Button/Button';
+import Main from '../Main/Main';
 import style from './ProductEditor.style';
 
-interface Props {
-  produit: IProduct;
+interface IProps {
+  product: IProduct;
 }
+interface Dispatch {
+  gotoHome: Function;
+  saveProduct: Function;
+}
+type Props = Dispatch & IProps;
 
 const ProductEditor = (props: Props) => {
-  const [state, setstate] = useState(props.produit);
-  useEffect(() => {
-    return () => {};
-  }, []);
+  const [state, setstate] = useState(props.product);
+  // useEffect(() => {
+  //   return () => {};
+  // }, []);
   return (
     <ScrollView>
       <View style={style.container}>
@@ -63,17 +71,44 @@ const ProductEditor = (props: Props) => {
         </View>
       </View>
       <View style={style.button}>
-        <MyButton onMyButtonPressedAction={() => undefined} bgColor="skyblue">
-          save
+        <MyButton
+          onMyButtonPressedAction={() => {
+            props.saveProduct(state);
+          }}
+          bgColor="skyblue">
+          <Text>save</Text>
         </MyButton>
       </View>
       <View style={style.button}>
-        <MyButton onMyButtonPressedAction={() => undefined} bgColor="tomato">
-          cancel
+        <MyButton
+          onMyButtonPressedAction={() => {
+            props.gotoHome();
+          }}
+          bgColor="tomato">
+          <Text>cancel</Text>
         </MyButton>
       </View>
     </ScrollView>
   );
 };
 
-export default ProductEditor;
+const mapStateToProps = (state: any, own: any) => {
+  return own;
+};
+
+const mapDispatchToProps = (dispatch: Function) => {
+  return {
+    gotoHome: () =>
+      dispatch({
+        type: 'SET_WINDOW',
+        value: <Main />,
+      }),
+    saveProduct: (product: IProduct) =>
+      dispatch({
+        type: PRODUCTS_ACTIONS.SAVE_PRODUCT,
+        value: product,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductEditor);

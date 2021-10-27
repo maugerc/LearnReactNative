@@ -11,13 +11,13 @@ type Props = StateProps & DispatchProps & IProps;
 
 const ProductList: React.FC<Props> = (props: Props) => {
   return (
-    <View style={style.listContainer}>
-      <ScrollView>
+    <ScrollView>
+      <View style={style.listContainer}>
         {props.products.map((e: IProduct) => (
           <Product product={e} key={'prod-' + e.id} />
         ))}
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
